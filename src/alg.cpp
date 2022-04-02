@@ -25,8 +25,7 @@ int prior(char op) {
     }
 }
 
-string infx2pstfx(string inf)
-{
+string infx2pstfx(string inf) {
     TStack<char, 100> stack1;
     string str = "";
     int length = inf.length();
@@ -68,12 +67,15 @@ prior(stack1.get())) || (stack1.isEmpty())) {
         stack1.pop();
         //cout << 4;
     }
-    str.erase(str.size() - 3);
+    if (length == 11) {
+        str.erase(str.size() - 1);
+    } else {
+        str.erase(str.size() - 3);
+    }
     return str;
 }
 
-int eval(string str_post)
-{
+int eval(string str_post) {
     TStack<int, 100> stack2;
     int k = str_post.length();
     for (int i = 0; i < k; ++i) {
