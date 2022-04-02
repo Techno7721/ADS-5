@@ -2,12 +2,10 @@
 #include <string>
 #include <map>
 #include "tstack.h"
-using namespace std;
+using std::string;
 
-int prior(char op)
-{
-    switch (op)
-    {
+int prior(char op) {
+    switch (op) {
     case '(':
         return 0;
     case ')':
@@ -27,7 +25,8 @@ int prior(char op)
     }
 }
 
-string infx2pstfx(string inf) {
+string infx2pstfx(string inf)
+{
     TStack<char, 100> stack1;
     string str = "";
     int length = inf.length();
@@ -40,7 +39,8 @@ string infx2pstfx(string inf) {
             }
             str += " ";
         }
-        if ((prior(inf[i]) == 0) || (prior(inf[i]) > prior(stack1.get())) || (stack1.isEmpty())) {
+        if ((prior(inf[i]) == 0) || (prior(inf[i]) >
+prior(stack1.get())) || (stack1.isEmpty())) {
             stack1.push(inf[i]);
         } else {
             if (prior(inf[i]) == 1) {
@@ -51,8 +51,7 @@ string infx2pstfx(string inf) {
                     //cout << 2;
                 }
                 stack1.pop();
-            }
-            else if (prior(inf[i]) <= prior(stack1.get())) {
+            } else if (prior(inf[i]) <= prior(stack1.get())) {
                 while (prior(stack1.get()) > 1) {
                     str += stack1.get();
                     str += " ";
@@ -73,31 +72,32 @@ string infx2pstfx(string inf) {
     return str;
 }
 
-int eval(std::string pref) {
+int eval(string str_post)
+{
     TStack<int, 100> stack2;
-    int k = post.length() - 1;
+    int k = str_post.length() - 1;
     for (int i = 0; i < k; ++i) {
         string str1 = "";
-        while ((prior(post[i]) == -1) && (i < k)) {
-            str1 += post[i];
+        while ((prior(str_post[i]) == -1) && (i < k)) {
+            str1 += str_post[i];
             ++i;
             //cout << 5;
         }
-        if (prior(post[i]) > 1) {
+        if (prior(str_post[i]) > 1) {
             int x = stack2.get();
             stack2.pop();
             int y = stack2.get();
             stack2.pop();
-            if (post[i] == '+') {
+            if (str_post[i] == '+') {
                 stack2.push((y + x));
             }
-            if (post[i] == '-') {
+            if (str_post[i] == '-') {
                 stack2.push((y - x));
             }
-            if (post[i] == '*') {
+            if (str_post[i] == '*') {
                 stack2.push((y * x));
             }
-            if ((post[i] == '/') && (x != 0)) {
+            if ((str_post[i] == '/') && (x != 0)) {
                 stack2.push((y / x));
             }
         }
