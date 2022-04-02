@@ -25,8 +25,7 @@ int prior(char op) {
     }
 }
 
-string infx2pstfx(string inf)
-{
+string infx2pstfx(string inf) {
     TStack<char, 100> stack1;
     string str = "";
     int length = inf.length();
@@ -72,8 +71,7 @@ prior(stack1.get())) || (stack1.isEmpty())) {
     return str;
 }
 
-int eval(string str_post)
-{
+int eval(string str_post) {
     TStack<int, 100> stack2;
     int k = str_post.length() - 1;
     for (int i = 0; i < k; ++i) {
@@ -102,7 +100,7 @@ int eval(string str_post)
             }
         }
         if (str1 != "") {
-            stack2.push(stoi(str1));
+            stack2.push(std::stoi(str1));
         }
     }
     return stack2.get();
